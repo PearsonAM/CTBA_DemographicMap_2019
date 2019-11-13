@@ -1,0 +1,37 @@
+---
+title: "CTBA-Chicago Demographic Map Data"
+author: "Lex"
+date: "10/21/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r libraries, include=FALSE}
+rm(list=ls()) 
+#install.packages("ggplot2")
+#install.packages("ipumsr")
+#install.packages("sf")
+library(tidyverse)
+library(foreign)
+library(moments)
+library(ggplot2)
+library(dplyr)
+library(sf)
+library(ipumsr)
+```
+
+```{r load data1, include=FALSE}
+
+x <- read.csv("C:/alexi/Desktop/CTBA/Chicago Demographic Map/CTBA-Chicago-Demographic-Map/Data/nhgis0003_csv/nhgis0003_csv/nhgis0003_ts_nominal_county.csv")
+y <- read_sf("C:/Users/alexi/Desktop/CTBA/Chicago Demographic Map/CTBA-Chicago-Demographic-Map/Data/nhgis0003_shape/nhgis0003_shape/nhgis0003_shapefiles/US_state_cenpop_2010.shp")
+
+cdbk_x <- read_ipums_codebook("C:/Users/alexi/Desktop/CTBA/Chicago Demographic Map/CTBA-Chicago-Demographic-Map/Data/nhgis0003_csv/nhgis0003_csv/nhgis0003_ts_nominal_county_codebook.txt")
+
+View(x)
+x <- x %>% filter(STATE=="Illinois")
+y <- y %>% filter(STNAME=="Illinois")
+View(cdbk_x$var_info)
+```
+
